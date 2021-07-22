@@ -1,0 +1,53 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: black;
+    /*position: fixed;*/
+  top: 0;
+  width: 100%;
+}
+
+li {
+  float: left;
+    font-family: Georgia, serif;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  color:lightblue;
+}
+
+.active {
+  background-color: #777777;
+}
+
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    padding: 0;
+    display: block;
+    margin: 0 auto;
+    max-height: 45%;
+    max-width: 45%;
+}
+
+
+
+
+

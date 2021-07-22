@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Window property Example</title>
+        <script>
+            function windowProperty()
+            {
+                alert("Window location: " + window.location);
+            }
+            function windowMethod()
+            {
+                var selfdestruct = window.confirm("do you want to self destruct this window?");
+                if (selfdestruct === true)
+                {
+                    window.close();
+                }
+                else
+                {
+                    window.alert("Window is still operational");
+                }
+            }
+            function documentProperty()
+            {
+                window.alert("Document Title: " + document.title);
+                window.alert("Document BG Color: " + document.bgColor);
+            }
+            function documentPropertyOrange()
+            {
+                window.alert("The document background color is changing to Orange");
+                document.bgColor = "Orange";
+            }
+        </script>
+    </head>
+
+    <body>
+        <p><h1>Testing Window Properties</h1></p>
+        <p>
+            <b>Q1. Window Properties: </b>
+            <input type="button" value="Find Out URL" name="buttonWP" onclick="windowProperty()">
+        </p>
+        <p>
+            <b>Q2. Window Methods: </b>
+            <input type="button" value="Close Window" name="buttonWM" onclick="windowMethod()">
+        </p>
+        <p>
+            <b>Q3a. Document Properties: </b>
+            <input type="button" value="Find Out document Title and background color" name="buttonDP" onclick="documentProperty()">
+        </p>
+        <p>
+            <b>Q3b. Document Properties: </b>
+            <input type="button" value="Change background color" name="buttonDPO" onclick="documentPropertyOrange()">
+        </p>
+    </body>
+</html>

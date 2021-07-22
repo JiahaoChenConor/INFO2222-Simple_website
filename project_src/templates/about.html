@@ -1,0 +1,172 @@
+<style type="text/css">
+    p {
+        line-height: 24px;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+    }
+
+    html {
+      box-sizing: border-box;
+    }
+
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    .column {
+      float: left;
+      width: 20%;
+      margin-bottom: 16px;
+      padding: 0 8px;
+    }
+
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      margin: 8px;
+
+    }
+
+    .about-section {
+      padding: 50px;
+      text-align: center;
+      background-color: white;
+      color: black;
+    }
+
+    .container {
+      padding: 0 16px;
+    }
+
+    .container::after, .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    .title {
+      color: grey;
+    }
+
+    .button {
+      border: none;
+      outline: 0;
+      display: inline-block;
+      padding: 8px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .button:hover {
+      background-color: #555;
+    }
+
+    @media screen and (max-width: 650px) {
+      .column {
+        width: 100%;
+        display: block;
+      }
+    }
+
+
+    a { color: white; } /* CSS link color */
+    .round_icon{
+      width: 250px;
+      height: 250px;
+      display: flex;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+
+</style>
+
+<div class="about-section">
+  <h1>About us</h1>
+    <p>We are a group of 5 USYD students whose degrees are Bachelor of Advanced Computing,</br>
+        aiming to help those students who have an interest in web development to gain corresponding<br>
+        knowledge and abilities they need.<br>
+    </p>
+</div>
+
+<h1 style="text-align:center">Our Team</h1>
+<br>
+<br>
+<div class="row">
+  <div class="column">
+    <div class="card">
+<!--      <img src="img/alan.jpg" alt="Alan" class="round_icon">-->
+      <div class="container">
+        <h2>Alan</h2>
+        <p class="title">CEO</p>
+        <p>Alan is highly motivated in the web development
+           </p>
+
+        <p><button class="button"><a href="mailto:#" id="contact_CEO">Contact</a>
+</button></button></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+<!--      <img src="img/qihan.jpg" alt="qihan" class="round_icon">-->
+      <div class="container">
+        <h2>Qihan</h2>
+        <p class="title">Engineer</p>
+        <p>Qihan is highly motivated on Python.</p>
+
+        <p><button class="button"><a href="mailto:#">Contact</a>
+</button></button></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+<!--      <img src="img/Alison.jpg" alt="Alison" class="round_icon">-->
+      <div class="container">
+        <h2>Alison</h2>
+        <p class="title">President</p>
+        <p>Alison is an expert on the JVM system. </p>
+        <p><button class="button"><a href="mailto:#">Contact</a>
+</button></button></p>
+      </div>
+    </div>
+  </div>
+
+    <div class="column">
+    <div class="card">
+<!--      <img src="img/Vincent.jpg" alt="Vincent" class="round_icon">-->
+      <div class="container">
+        <h2>Vincent</h2>
+        <p class="title">Publisher</p>
+        <p>As a publisher, Vincent is good at frontend,</p>
+        <p><button class="button"><a href="mailto:#">Contact</a>
+</button></button></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+<!--      <img src="img/conor.jpg" alt="conor" class="round_icon" >-->
+      <div class="container">
+        <h2>Conor</h2>
+        <p class="title">Editor-in-Chief</p>
+        <p>Conor is good at developing backend system. </p>
+
+        <p><button class="button"><a href="mailto:jiahaochen775@gmail.com">Contact</a>
+</button></p>
+      </div>
+    </div>
+  </div>
+
+</div>

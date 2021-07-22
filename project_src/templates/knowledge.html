@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>knowledge</title>
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/temp.css">
+    <link href="css/prism.css" rel="stylesheet" />
+    <style type="text/css">
+        *{
+        padding: 0;
+        margin: 0;
+        }
+
+        .content{
+            width: 90%;
+            height: 100%;
+        }
+
+        .content-left{
+            margin-top: 20px;
+            width: 19%;
+            height: 900px;
+            background-color: white;
+
+            float: left;
+        }
+
+        .content-right{
+            margin-top: 30px;
+            width: 75%;
+            height: 900px;
+            background-color: white;
+
+            float: right;
+
+        }
+
+        .left-title{
+            height: 50px;
+            width: 100%;
+            font-family: "Brush Script MT",serif;
+            font-size: xx-large;
+
+        }
+
+        .left-title>a{
+            display: block;
+            width: 100%;
+            height: 50px;
+            /*垂直剧中*/
+            line-height: 50px;
+
+            /*水平剧中*/
+            text-align: center;
+            color: black;
+
+            text-decoration: none;
+
+
+        }
+
+        .seg{
+            height: 1px;
+            width: 100%;
+            background: black;
+
+
+        }
+
+        .nav{
+            margin-top: 5px;
+            position: fixed;
+            font-size: medium;
+
+        }
+
+        .nav-title{
+            height: 30px;
+            width: 100%;
+            color: black;
+            font-family: "Andale Mono",serif;
+            font-size: larger;
+            line-height: 40px;
+            text-align: center;
+            /*主标题当鼠标 滑 变手*/
+            cursor: pointer;
+
+        }
+
+        .nav-content{
+            width: 100%;
+            height: 100%;
+            background: white;
+            font-size: medium;
+        }
+
+        .nav-content>a{
+            display: block;
+            height: 30px;
+            width: 100%;
+            color: black;
+
+            text-decoration: none;
+            line-height: 30px;
+            text-align: center;
+            background-color: white;
+
+        }
+
+        .nav-content>a:hover{
+            display: block;
+            height: 30px;
+            width: 100%;
+            color: darkgrey;
+
+            text-decoration: none;
+            line-height: 30px;
+            text-align: center;
+            background: white;
+
+        }
+
+
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background-color: #333;
+            /*position: fixed;*/
+          top: 0;
+          width: 100%;
+        font-size: 16px;
+        }
+
+        li {
+          float: left;
+            font-family: Sans-serif;
+        }
+
+        li a {
+          display: block;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+        }
+
+        /* Change the link color to #111 (black) on hover */
+        li a:hover {
+          color:lightblue;
+        }
+
+        .active {
+          background-color: #777777;
+        }
+
+        p {
+            font-family: Optima, serif;
+            font-size: large;
+            margin-top: 10px;
+            margin-bottom: 30px;
+            line-height: 40px;
+
+
+        }
+
+        h1 ,h2{
+            font-family:  Marker Felt, fantasy;
+            margin-top: 40px;
+
+        }
+
+
+
+        dd, dl{
+            margin-left: 10px;
+            margin-bottom: 10px;
+            font-family: Optima, serif;
+            font-size: medium;
+            line-height: 25px;
+        }
+
+        .box {
+            height: available;
+            width: auto;
+            background-color: #ddeff3;
+            border-radius: 4px;
+            box-shadow: 0 2px 2px rgba(10, 16, 20, 0.24),0 0 2px rgba(10,16,20,.12);
+            box-sizing: border-box;
+            transition: box-shadow .5s;
+
+
+
+            line-height: 40px;
+            font-family: Georgia, Serif,serif;
+            font-weight: bold;
+        }
+
+        div.go-top {
+            display: none;
+            opacity: 0.6;
+            z-index: 999999;
+            position: fixed;
+            bottom: 113px;
+            left: 90%;
+            margin-left: 40px;
+            border: 1px solid #a38a54;
+            width: 38px;
+            height: 38px;
+            background-color: #eddec2;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        div.go-top:hover {
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+
+        div.go-top div.arrow {
+            position: absolute;
+            left: 10px;
+            top: -1px;
+            width: 0;
+            height: 0;
+            border: 9px solid transparent;
+            border-bottom-color: #cc3333;
+        }
+
+        div.go-top div.stick {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            width: 8px;
+            height: 14px;
+            display: block;
+            background-color: #cc3333;
+            -webkit-border-radius: 1px;
+            -moz-border-radius: 1px;
+            border-radius: 1px;
+        }
+
+
+    </style>
+
+
+    <script type="text/javascript">
+
+        $(function () {
+            // 隐藏所有子标题
+            $(".nav-menu").each(function (){
+                $(this).children(".nav-content").hide();
+            });
+
+
+            $(".nav-title").each(function (){
+                $(this).click(function (){
+                    var navConEle = $(this).parent(".nav-menu").children(".nav-content")
+                    if (navConEle.css("display") !== "none"){
+                        navConEle.hide(500);
+                    }else{
+                        navConEle.show(500);
+                    }
+                });
+            });
+
+
+        });
+
+        $(function() {
+            $(window).scroll(function() {
+                if ($(window).scrollTop() > 1000)
+                    $('div.go-top').show();
+                else
+                    $('div.go-top').hide();
+            });
+            $('div.go-top').click(function() {
+                $('html, body').animate({scrollTop: 0}, 1000);
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+    <div class="go-top" id="go_top">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+    </div>
+
+    <div class="content">
+        <div class="content-left">
+            <div class="left-title" id="top">
+
+                <a href="#">Web Knowledge</a>
+
+            </div>
+            <div class="seg"></div>
+            <!-- menu nav-->
+            <div class="nav">
+                <!-- every main menu-->
+                <div class="nav-menu">
+                    <!-- title of main menu-->
+                    <div class="nav-title" id="basic_knowledge">Basic Knowledge</div>
+                    <!-- title of submenu-->
+                    <div class="nav-content">
+                        <a href="#html_basic" id="click_html_basic">HTML Basic</a>
+                        <a href="#css_basic" id="click_css_basic">CSS Basic</a>
+                        <a href="#js_basic" id="click_js_basic">Javascript Basic</a>
+                    </div>
+                </div>
+
+                <!-- every main menu-->
+                <div class="nav-menu">
+                    <!-- title of main menu-->
+                    <div class="nav-title" id="inter_knowledge">Intermediate Knowledge</div>
+                    <!-- title of submenu-->
+                    <div class="nav-content">
+                        <a href="#html_intermediate" id="click_html_inter">HTML Intermediate</a>
+                        <a href="#css_intermediate" id="click_css_inter">CSS Intermediate</a>
+                        <a href="#js_intermediate" id="click_js_inter">Javascript Intermediate</a>
+                    </div>
+                </div>
+
+                <!-- every main menu-->
+                <div class="nav-menu">
+                    <!-- title of main menu-->
+                    <div class="nav-title" id="adv_knowledge">Advanced Knowledge</div>
+                    <!-- title of submenu-->
+                    <div class="nav-content">
+                        <a href="#html_advanced" id="click_html_adv">HTML Advanced</a>
+                        <a href="#css_advanced" id="click_css_adv">CSS Advanced</a>
+                        <a href="#js_advanced" id="click_js_adv">Javascript Advanced</a>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <script src="js/prism.js"></script>
+        <div class="content-right" >
+
+            <div id="html_basic">
+                <h1>HTML text fundamentals </h1>
+                <p>One of HTML's main jobs is to give text structure and meaning (also known as semantics) so that a browser
+                    can display it correctly. This article explains the way HTML can be used to structure a page of text by
+                    adding headings and paragraphs, emphasizing words, creating lists, and more.</p>
+                <br>
+                <h2>The basics: headings and paragraphs</h2>
+                <p>Most structured text consists of headings and paragraphs, whether you are reading a story, a newspaper, a college textbook, a magazine, etc.</p>
+                <img src="img/1.jpeg" alt="Pulpit rock" width="800" height="300">
+                <p>Structured content makes the reading experience easier and more enjoyable.
+                    In HTML, each paragraph has to be wrapped in a  element, like so:</p>
+                <pre><code class="language-html">&lth1&gtThe Crushing Bore&lt/h1&gt</code></pre>
+                <h2>Implementing structural hierarchy</h2>
+                <p>For example, in this story, the &lth1&gt element represents the title of the story, the &lth2&gt elements represent the title of each chapter, and the &lth3&gt elements represent sub-sections of each chapter:</p>
+                <pre><code class="language-html">&lth1&gtThe Crushing Bore&lt/h1&gt
+
+&ltp&gtBy Chris Mills&lt/p&gt
+
+&lth2&gtChapter 1: The dark night&lt/h2&gt
+
+&ltp&gtIt was a dark night. Somewhere, an owl hooted. The rain lashed down on the ...&lt/p&gt
+
+&lth2&gtChapter 2: The eternal silence&lt/h2&gt
+
+&ltp&gtOur protagonist could not so much as a whisper out of the shadowy figure ...&lt/p&gt
+
+&lth3&gtThe specter speaks&lt/h3&gt
+
+&ltp&gtSeveral more hours had passed, when all of a sudden the specter sat bolt upright and exclaimed, "Please have mercy on my soul!"&lt/p&gt</code></pre>
+                <p>It's really up to you what the elements involved represent, as long as the hierarchy makes sense. You just need to bear in mind a few best practices as you create such structures:</p>
+                <dl>
+
+                    <dd>-- Preferably, you should use a single &lth1&gt per page—this is the top level heading, and all others sit below this in the hierarchy.</dd>
+
+                    <dd>-- Make sure you use the headings in the correct order in the hierarchy. Don't use &lth3&gt elements to represent subheadings, followed by &lth2&gt elements to represent sub-subheadings—that doesn't make sense and will lead to weird results.</dd>
+                    <dd>-- Of the six heading levels available, you should aim to use no more than three per page, unless you feel it is necessary. Documents with many levels (i.e., a deep heading hierarchy) become unwieldy and difficult to navigate. On such occasions, it is advisable to spread the content over multiple pages if possible.</dd>
+                </dl>
+                <h2> Why do we need semantics? </h2>
+                <p>Semantics are relied on everywhere around us—we rely on previous experience to tell us what the function of an everyday object is; when we see something, we know what its function will be. So, for example, we expect a red traffic light to mean "stop," and a green traffic light to mean "go." Things can get tricky very quickly if the wrong semantics are applied. (Do any countries use red to mean "go"? We hope not.)</p>
+                <p>In a similar vein, we need to make sure we are using the correct elements, giving our content the correct meaning, function, or appearance. In this context, the &lth1&gt element is also a semantic element, which gives the text it wraps around the role (or meaning) of "a top level heading on your page."</p>
+                <pre><code class="language-html">&lth1&gtThis is a top level heading&lt/h1&gt</code></pre>
+                <p>By default, the browser will give it a large font size to make it look like a heading (although you could style it to look like anything you wanted using CSS). More importantly, its semantic value will be used in multiple ways, for example by search engines and screen readers (as mentioned above).</p>
+                <p>On the other hand, you could make any element look like a top level heading. Consider the following:</p>
+                <pre><code class="language-html">&ltspan style="font-size: 32px; margin: 21px 0; display: block;"&gtIs this a top level heading?&lt/span&gt</code></pre>
+                <p>This is a &ltspan&gt element. It has no semantics. You use it to wrap content when you want to apply CSS to it (or do something to it with JavaScript) without giving it any extra meaning. (You'll find out more about these later on in the course.) We've applied some CSS to it to make it look like a top level heading, but since it has no semantic value, it will not get any of the extra benefits described above. It is a good idea to use the relevant HTML element for the job.</p>
+            </div>
+
+            <br><br><br><br>
+
+            <div id="css_basic">
+                <h1>What is CSS?</h1>
+                <p>CSS (Cascading Style Sheets) allows you to create great-looking web pages, but how does it work under the hood? This article explains what CSS is, with a simple syntax example, and also covers some key terms about the language.</p>
+                <p>In the Introduction to HTML module we covered what HTML is, and how it is used to mark up documents. These documents will be readable in a web browser. Headings will look larger than regular text, paragraphs break onto a new line and have space between them. Links are colored and underlined to distinguish them from the rest of the text. What you are seeing is the browser's default styles — very basic styles that the browser applies to HTML to make sure it will be basically readable even if no explicit styling is specified by the author of the page.</p>
+                <br>
+                <h2>What is CSS for?</h2>
+                <p>As we have mentioned before, CSS is a language for specifying how documents are presented to users — how they are styled, laid out, etc.</p>
+                <p>A document is usually a text file structured using a markup language — HTML is the most common markup language, but you may also come across other markup languages such as SVG or XML.</p>
+                <p>Presenting a document to a user means converting it into a form usable by your audience. Browsers, like Firefox, Chrome, or Edge , are designed to present documents visually, for example, on a computer screen, projector or printer.</p>
+                <p>CSS can be used for very basic document text styling — for example changing the color and size of headings and links. It can be used to create layout — for example turning a single column of text into a layout with a main content area and a sidebar for related information. It can even be used for effects such as animation. Have a look at the links in this paragraph for specific examples.</p>
+                <h2>CSS syntax</h2>
+                <p>CSS is a rule-based language — you define rules specifying groups of styles that should be applied to particular elements or groups of elements on your web page. For example "I want the main heading on my page to be shown as large red text."</p>
+                <p>The following code shows a very simple CSS rule that would achieve the styling described above:</p>
+                <pre><code class="language-css">h1 {
+    color: red;
+    font-size: 5em;
+}</code></pre>
+                <p>The rule opens with a selector . This selects the HTML element that we are going to style. In this case we are styling level one headings (&lth1&gt).</p>
+                <p>We then have a set of curly braces { }. Inside those will be one or more declarations, which take the form of property and value pairs. Each pair specifies a property of the element(s) we are selecting, then a value that we'd like to give the property.</p>
+                <p>Before the colon, we have the property, and after the colon, the value. CSS properties have different allowable values, depending on which property is being specified. In our example, we have the color property, which can take various color values. We also have the font-size property. This property can take various size units as a value.</p>
+                <p>A CSS stylesheet will contain many such rules, written one after the other.</p>
+                <pre><code class="language-css">h1 {
+    color: red;
+    font-size: 5em;
+}
+
+p {
+    color: black;
+}</code></pre>
+                <p>You will find that you quickly learn some values, whereas others you will need to look up. The individual property pages on MDN give you a quick way to look up properties and their values when you forget, or want to know what else you can use as a value.</p>
+                <div class="box">
+                    Note: You can find links to all the CSS property pages (along with other CSS features) listed on the MDN CSS reference. Alternatively, you should get used to searching for "mdn css-feature-name" in your favorite search engine whenever you need to find out more information about a CSS feature. For example, try searching for "mdn color" and "mdn font-size"!</div>
+            </div>
+
+            <br><br><br><br>
+
+            <div id="js_basic">
+                <h1>JavaScript First Steps</h1>
+                <p>In our first JavaScript module, we first answer some fundamental questions such as "what is JavaScript?", "what does it look like?", and "what can it do?", before moving on to taking you through your first practical experience of writing JavaScript. After that, we discuss some key building blocks in detail, such as variables, strings, numbers and arrays.</p>
+                <br>
+                <h2>What is JavaScript?</h2>
+                <p>Welcome to the MDN beginner's JavaScript course! In this article we will look at JavaScript from a high level, answering questions such as "What is it?" and "What can you do with it?", and making sure you are comfortable with JavaScript's purpose.</p>
+                <h2>A high-level definition</h2>
+                <p>JavaScript is a scripting or programming language that allows you to implement complex features on web pages — every time a web page does more than just sit there and display static information for you to look at — displaying timely content updates, interactive maps, animated 2D/3D graphics, scrolling video jukeboxes, etc. — you can bet that JavaScript is probably involved. It is the third layer of the layer cake of standard web technologies, two of which (HTML and CSS) we have covered in much more detail in other parts of the Learning Area.</p>
+                <img src="img/js_basic_1.jpg" alt="javascript" width="600" height="400" >
+                <dl>
+                    <dd>-- HTML is the markup language that we use to structure and give meaning to our web content, for example defining paragraphs, headings, and data tables, or embedding images and videos in the page.</dd>
+                    <dd>-- CSS is a language of style rules that we use to apply styling to our HTML content, for example setting background colors and fonts, and laying out our content in multiple columns.</dd>
+                    <dd>-- JavaScript is a scripting language that enables you to create dynamically updating content, control multimedia, animate images, and pretty much everything else. (Okay, not everything, but it is amazing what you can achieve with a few lines of JavaScript code.)</dd>
+                </dl>
+                <h2>What is JavaScript doing on your page?</h2>
+                <p>Here we'll actually start looking at some code, and while doing so, explore what actually happens when you run some JavaScript in your page.</p>
+                <p>Let's briefly recap the story of what happens when you load a web page in a browser (first talked about in our How CSS works article). When you load a web page in your browser, you are running your code (the HTML, CSS, and JavaScript) inside an execution environment (the browser tab). This is like a factory that takes in raw materials (the code) and outputs a product (the web page).</p>
+                <img src="img/js_basic_2.jpg" alt="javascript" width="800" height="250" >
+                <p>A very common use of JavaScript is to dynamically modify HTML and CSS to update a user interface, via the Document Object Model API (as mentioned above). Note that the code in your web documents is generally loaded and executed in the order it appears on the page. If the JavaScript loads and tries to run before the HTML and CSS it is affecting has been loaded, errors can occur. You will learn ways around this later in the article, in the Script loading strategies section.</p>
+                <h2>JavaScript running order</h2>
+                <p>When the browser encounters a block of JavaScript, it generally runs it in order, from top to bottom. This means that you need to be careful what order you put things in. For example, let's return to the block of JavaScript we saw in our first example:</p>
+                 <pre><code class="language-javascript">const para = document.querySelector('p');
+
+para.addEventListener('click', updateName);
+
+function updateName() {
+  let name = prompt('Enter a new name');
+  para.textContent = 'Player 1: ' + name;
+}</code></pre>
+                <p>Here we are selecting a text paragraph (line 1), then attaching an event listener to it (line 3) so that when the paragraph is clicked, the updateName() code block (lines 5–8) is run. The updateName() code block (these types of reusable code blocks are called "functions") asks the user for a new name, and then inserts that name into the paragraph to update the display.</p>
+                <p>If you swapped the order of the first two lines of code, it would no longer work — instead, you'd get an error returned in the browser developer console — TypeError: para is undefined. This means that the para object does not exist yet, so we can't add an event listener to it.</p>
+            </div>
+
+            <br><br><br><br>
+
+            <div id="html_intermediate">
+                <h1>HTML Intermediate</h1>
+                <h2>Lists </h2>
+                <p>Now let's turn our attention to lists. Lists are everywhere in life—from your shopping list to the list of directions you subconsciously 
+                    follow to get to your house every day, to the lists of instructions you are following in these tutorials! Lists are
+                    everywhere on the web, too, and we've got three different types to worry about.</p>
+                <h3>Unordered</h3>
+                <p>Unordered lists are used to mark up lists of items for which the order of the items doesn't matter. Every unordered list starts off with a &ltul&gt element—this wraps around all the list items:</p>
+                <pre><code class="language-html">&ltul&gt
+milk
+eggs
+bread
+&lt/ul&gt</code></pre>
+                <p>The last step is to wrap each list item in a &ltli&gt (list item) element:</p>
+                <pre><code class="language-html">&ltul&gt
+  &ltli&gtmilk&lt/li&gt
+  &ltli&gteggs&lt/li&gt
+  &ltli&gtbread&lt/li&gt
+  &ltli&gthummus&lt/li&gt
+&lt/ul&gt</code></pre>
+                <h3>Ordered</h3>
+                <p>The markup structure is the same as for unordered lists, except that you have to wrap the list items in an &ltol&gt element, rather than &ltul&gt:</p>
+                <pre><code class="language-html">&ltol&gt
+  &ltli&gtDrive to the end of the road&lt/li&gt
+  &ltli&gtTurn right&lt/li&gt
+  &ltli&gtGo straight across the first two roundabouts&lt/li&gt
+  &ltli&gtTurn left at the third roundabout&lt/li&gt
+  &ltli&gtThe school is on your right, 300 meters up the road&lt/li&gt  
+&lt/ol&gt</code></pre>
+                <br>
+                <h2>Italic, bold, underline...</h2>
+                <p>
+                    The elements we've discussed so far have clearcut associated semantics. The situation with &ltb&gt, &lti&gt, and &ltu&gt is somewhat more complicated. They came about so people could write bold, italics, or underlined text in an era when CSS was still supported poorly or not at all. Elements like this, which only affect presentation and not semantics, are known as presentational elements and should no longer be used because, as we've seen before, semantics is so important to accessibility, SEO, etc.
+                    <br><br>HTML5 redefined &ltb&gt, &lti&gt, and &ltu&gt with new, somewhat confusing, semantic roles.
+                    <br><br>Here's the best rule of thumb: It's likely appropriate to use &ltb&gt, &lti&gt, or &ltu&gt to convey a meaning traditionally conveyed with bold, italics, or underline, provided there is no more suitable element. However, it always remains critical to keep an accessibility mindset. The concept of italics isn't very helpful to people using screen readers, or to people using a writing system other than the Latin alphabet.
+                </p>
+                <dl>
+                    <dd>-- &lti&gt is used to convey a meaning traditionally conveyed by italic: foreign words, taxonomic designation, technical terms, a thought...</dd>
+                    <dd>-- &ltb&gt is used to convey a meaning traditionally conveyed by bold: key words, product names, lead sentence...</dd>
+                    <dd>-- &ltu&gt is used to convey a meaning traditionally conveyed by underline: proper name, misspelling...</dd>
+                </dl>
+                <br><br>
+
+                <h2>Hyperlinks</h2>
+                <h3>What is a hyperlink</h3>
+                <p>Hyperlinks are one of the most exciting innovations the Web has to offer. They've been a feature of the Web since the beginning, and are what makes the Web a web. 
+                    Hyperlinks allow us to link documents to other documents or resources, link to specific parts of documents, or make apps available at a web address. Almost any web content can be converted to a link so that when clicked or otherwise activated the web browser goes to another web address (URL).</p>
+                <h3>How to create a hyperlink</h3>
+                <p>A basic link is created by wrapping the text or other content, see Block level links, inside an &lta&gt element and using the href attribute, also known as a Hypertext Reference, or target, that contains the web address. 
+                    Another attribute you may want to add to your links is title. The title contains additional information about the link, such as which kind of information the page contains, or things to be aware of on the web site.</p>
+                    <pre><code class="language-html">&ltp&gtI'm creating a link to
+&lta&gt href="https://www.mozilla.org/en-US/"
+        title="The best place to find more information about Mozilla's
+               mission and how to contribute">the Mozilla homepage&lt/a&gt.
+&lt/p&gt</code></pre>
+            </div>
+
+            <div id="css_intermediate">
+                <h1>CSS intermediate</h1>
+                <h2>Adding CSS to our document</h2>
+                <p>The very first thing we need to do is to tell the HTML document that we have some CSS rules we want it to use. There are three different ways to apply CSS to an HTML document that you'll commonly come across,
+                     however, for now, we will look at the most usual and useful way of doing so — linking CSS from the head of your document.</p>
+                <p>Create a file in the same folder as your HTML document and save it as styles.css. The .css extension shows that this is a CSS file.</p>
+                <p>To link styles.css to index.html add the following line somewhere inside the &lt/head&gt of the HTML document:</p>
+                <pre><code class = 'language-css'>&ltlink rel="stylesheet" href="styles.css"&lt/link&gt</code></pre>
+                <p>This &ltlink&gt element tells the browser that we have a stylesheet, using the rel attribute, and the location of that stylesheet as the value of the href attribute. You can test that the CSS works by adding a rule to styles.css. Using your code editor add the following to your CSS file:</p>
+                <pre><code class = 'language-css'>h1 {
+  color: red;
+}</code></pre>
+                <p>Save your HTML and CSS files and reload the page in a web browser. The level one heading at the top of the document should now be red. If that happens, congratulations — you have successfully applied some CSS to an HTML document. 
+                    If that doesn't happen, carefully check that you've typed everything correctly.</p>
+                <p>You can continue to work in styles.css locally, or you can use our interactive editor below to continue with this tutorial. The interactive editor acts as if the CSS in the first panel is linked to the HTML document, 
+                    just as we have with our document above.</p>
+                <h2>Styling HTML elements</h2>
+                <p>By making our heading red we have already demonstrated that we can target and style an HTML element. We do this by targeting an element selector — this is a selector that directly matches an HTML element name. To target all paragraphs in the document you would use the selector p.
+                     To turn all paragraphs green you would use:</p>
+                <pre><code class = 'language-css'>p {
+  color: green;
+}</code></pre>
+                <p>You can target multiple selectors at once, by separating the selectors with a comma. If I want all paragraphs and all list items to be green my rule looks like this:</p>
+                <pre><code class = 'language-css'>p, li {
+  color: green;
+}</code></pre>
+                <h2>Styling things based on their location in a document</h2>
+                <p>There are times when you will want something to look different based on where it is in the document. There are a number of selectors that can help you here, but for now we will look at just a couple.
+                     In our document are two &lt/em&gt elements — one inside a paragraph and the other inside a list item. To select only an &lt/em&gt that is nested inside an &lt/li&gt element I can use a selector called the descendant combinator, which takes the form of a space between two other selectors.</p>
+                <p>Add the following rule to your stylesheet.</p>
+                <pre><code class = 'language-css'>li em {
+  color: rebeccapurple;
+}</code></pre>
+                <p>This selector will select any &lt/em&gt element that is inside (a descendant of) an &lt/li&gt. So in your example document, you should find that the &lt/em&gt in the third list item is now purple, but the one inside the paragraph is unchanged.</p>
+                <p>Something else you might like to try is styling a paragraph when it comes directly after a heading at the same hierarchy level in the HTML. To do so place a +  (an adjacent sibling combinator) between the selectors.</p>
+                <p>Try adding this rule to your stylesheet as well:</p>
+                <pre><code class = 'language-css'>h1 + p {
+  font-size: 200%;
+}</code></pre>
+                <p>The live example below includes the two rules above. Try adding a rule to make a span red, if it is inside a paragraph. You will know if you have it right as the span in the first paragraph will be red, but the one in the first list item will not change color.</p> 
+                
+                <h2>Styling things based on state</h2>
+                <p>The final type of styling we shall take a look at in this tutorial is the ability to style things based on their state. A straightforward example of this is when styling links. When we style a link we need to target the &lt/a&gt (anchor) element. This has different states depending on whether it is unvisited, 
+                    visited, being hovered over, focused via the keyboard, or in the process of being clicked (activated). You can use CSS to target these different states — the CSS below styles unvisited links pink and visited links green.</p>
+                <pre><code class = 'language-css'>a:link {
+  color: pink;
+}
+
+a:visited {
+  color: green;
+}</code></pre>
+                <p>You can change the way the link looks when the user hovers over it, for example removing the underline, which is achieved by in the next rule:</p>
+                <pre><code class = 'language-css'>a:hover {
+  text-decoration: none;
+}</code></pre>
+                <p>In the live example below, you can play with different values for the various states of a link. I have added the rules above to it, and now realize that the pink color
+                     is quite light and hard to read — why not change that to a better color? Can you make the links bold?</p>
+
+            </div>
+
+            <div id="js_intermediate">
+                <h1>JavaScript Intermediate</h1>
+                <p>We want to set really clear expectations here: You won't be expected to learn JavaScript by the end of this article, or even understand all the code we are asking you to write. 
+                    Instead, we want to give you an idea of how JavaScript's features work together, and what writing JavaScript feels like. In subsequent articles you'll revisit all the features shown here in a lot more detail,
+                     so don't worry if you don't understand it all immediately!</p>
+                <h2>Thinking like a programmer</h2>
+                <p>One of the hardest things to learn in programming is not the syntax you need to learn, but how to apply it to solve real world problems. You need to start thinking like a programmer — this generally involves looking at descriptions of what your program needs to do, working out what code features are needed to achieve those things,
+                     and how to make them work together.</p>
+                <p>This requires a mixture of hard work, experience with the programming syntax, and practice — plus a bit of creativity. The more you code, 
+                    the better you'll get at it. We can't promise that you'll develop "programmer brain" in five minutes, but we will give you plenty of opportunity to practice thinking like a programmer throughout the course.</p>
+                <p>With that in mind, let's look at the example we'll be building up in this article, and review the general process of dissecting it into tangible tasks.</p>
+                <h2>Initial setup</h2>
+                <p>The place where we'll be adding all our code is inside the &lt/script&gt element at the bottom of the HTML:</p>
+                <pre><code class = 'language-js'>&ltscript&gt
+  // Your JavaScript goes here
+&lt/script&gt</code></pre>
+                <h2>Adding variables to store our data</h2>
+                <p>Let's get started. First of all, add the following lines inside your &ltscript&gt element:</p>
+                <pre><code class = 'language-js'>let randomNumber = Math.floor(Math.random() * 100) + 1;
+
+const guesses = document.querySelector('.guesses');
+const lastResult = document.querySelector('.lastResult');
+const lowOrHi = document.querySelector('.lowOrHi');
+
+const guessSubmit = document.querySelector('.guessSubmit');
+const guessField = document.querySelector('.guessField');
+
+let guessCount = 1;
+let resetButton;</code></pre>
+                <p>This section of the code sets up the variables and constants we need to store the data our program will use. Variables are basically containers for values (such as numbers,
+                     or strings of text). You create a variable with the keyword let (or var) followed by a name for your variable (you'll read more about the difference between the keywords in a future article). 
+                     Constants are used to store values that are immutable or can't be changed and are created with the keyword const. In this case, we are using constants to store references to parts of our user interface; the text inside some of them might change, but the HTML elements referenced stay the same.</p>
+                <p>You can assign a value to your variable or constant with an equals sign (=) followed by the value you want to give it.</p>
+                <p>In our example:</p>
+                <dl>
+                    <dd>-- The first variable — randomNumber — is assigned a random number between 1 and 100, calculated using a mathematical algorithm.</dd>
+                    <dd>-- The first three constants are each made to store a reference to the results paragraphs in our HTML, and are used to insert values into the paragraphs later on in the code (note how they are inside a &ltdiv&gt element, which is itself used to select all three later on for resetting, when we restart the game):
+                        <pre><code class = 'language-js'>&ltdiv class="resultParas"&gt
+  &ltp&gt class="guesses">&lt/p&gt
+  &ltp&gt class="lastResult">&lt/p&gt
+  &ltp&gt class="lowOrHi">&lt/p&gt
+&lt/div&gt</code></pre></dd>
+                    <dd>-- The next two constants store references to the form text input and submit button and are used to control submitting the guess later on.
+                        <pre><code class = 'language-js'>&ltlabel for="guessField"&gtEnter a guess: &lt/label&gt&ltinput type="text" id="guessField" class="guessField"&gt
+&ltinput type="submit" value="Submit guess" class="guessSubmit"&gt</code></pre></dd>
+                    <dd>-- Our final two variables store a guess count of 1 (used to keep track of how many guesses the player has had), and a reference to a reset button that doesn't exist yet (but will later).</dd>
+                </dl>
+                <h2>Functions</h2>
+                <p>Next, add the following below your previous JavaScript:</p>
+                <pre><code class = 'language-js'>function checkGuess() {
+  alert('I am a placeholder');
+}</code></pre>
+                <p>Functions are reusable blocks of code that you can write once and run again and again, saving the need to keep repeating code all the time. This is really useful. There are a number of ways to define functions,
+                     but for now we'll concentrate on one simple type. Here we have defined a function by using the keyword function, followed by a name, with parentheses put after it. After that we put two curly braces ({ }).
+                      Inside the curly braces goes all the code that we want to run whenever we call the function.</p>
+                <p>When we want to run the code, we type the name of the function followed by the parentheses.</p>
+                <p>Let's try that now. Save your code and refresh the page in your browser. Then go into the developer tools JavaScript console, and enter the following line:</p>
+                <pre><code class = 'language-js'>checkGuess();</code></pre>
+                <p>After pressing Return/Enter, you should see an alert come up that says I am a placeholder; we have defined a function in our code that creates an alert whenever we call it.</p>
+            </div>
+
+
+            <div id="html_advanced">
+                <h1>HTML Advanced</h1>
+                <h2>Images in HTML</h2>
+                <h3>How do we put an image on a webpage?</h3>
+                <p>
+                    In order to put a simple image on a webpage, we use the &ltimg&gt element. This is an empty element (meaning that it has no text content or closing tag) that requires a minimum of one attribute to be useful — src (sometimes spoken as its full title, source). The src attribute contains a path pointing to the image you want to embed in the page, which can be a relative or absolute URL, in the same way as href attribute values in &lta&gt elements.
+                </p>
+                <div class="box">
+                    NOTE: You should read A quick primer on URLs and paths to refresh your memory on relative and absolute URLs before continuing.
+                </div>
+                <p>
+                    So for example, if your image is called dinosaur.jpg, and it sits in the same directory as your HTML page, you could embed the image like so:
+                </p>
+                <pre><code class="language-html">&ltimg src="dinosaur.jpg"&gt</code></pre>
+                <p>
+                    If the image was in an images subdirectory, which was inside the same directory as the HTML page, then you'd embed it like this:
+                </p>
+                <pre><code class="language-html">&ltimg src="images/dinosaur.jpg"&gt</code></pre>
+
+                <p>You could embed the image using its absolute URL, for example:</p>
+                <pre><code class="language-html">&ltimg src="https://www.example.com/images/dinosaur.jpg"&gt</code></pre>
+                <p>
+                    But this is pointless, as it just makes the browser do more work, looking up the IP address from the DNS server all over again, etc. You'll almost always keep the images for your website on the same server as your HTML.
+                </p>
+            </div>
+
+
+          <div id="css_advanced">
+                <h1>CSS Advanced</h1>
+                <h2>Using multiple backgrounds</h2>
+                <h3>Example</h3>
+                <p>In this example, three backgrounds are stacked: the Firefox logo, an image of bubbles, and a linear gradient:</p>
+
+              <h4>HTML</h4>
+                <pre><code class="language-html">&ltdiv class="multi-bg-example"&gt&lt/div&gt</code></pre>
+              <br>
+              <h4>CSS</h4>
+                <pre><code class="language-css">.multi-bg-example {
+  width: 100%;
+  height: 400px;
+  background-image: url(https://mdn.mozillademos.org/files/11305/firefox.png),
+      url(https://mdn.mozillademos.org/files/11307/bubbles.png),
+      linear-gradient(to right, rgba(30, 75, 115, 1), rgba(255, 255, 255, 0));
+  background-repeat: no-repeat,
+      no-repeat,
+      no-repeat;
+  background-position: bottom right,
+      left,
+      right;
+}</code></pre>
+              <br>
+              <h4>Result</h4>
+              <img src="img/css_advanced.jpg", alt="firefox", width="400", height="200">
+              <p>As you can see here, the Firefox logo (listed first within background-image) is on top, directly above the bubbles graphic, followed by the gradient (listed last) sitting underneath all previous 'images'. Each subsequent sub-property (background-repeat and background-position) applies to the corresponding backgrounds. So the first listed value for background-repeat applies to the first (frontmost) background, and so forth.</p>
+
+            </div>
+
+
+
+              <div id="js_advanced">
+                <h1>Javascript Advanced</h1>
+                <h2>Classes</h2>
+                <h3>constructor</h3>
+                  <p>The constructor method is a special method of a class for creating and initializing an object of that class.</p>
+            <pre><code class="language-js">class Polygon {
+  constructor() {
+    this.name = 'Polygon';
+  }
+}
+
+const poly1 = new Polygon();
+
+console.log(poly1.name);
+// expected output: "Polygon"</code></pre>
+
+                  <h3>Syntax</h3>
+                  <pre><code class="language-js">constructor([arguments]) { ... }</code></pre>
+
+                  <h3>Description</h3>
+                  <p>A constructor enables you to provide any custom initialization that must be done before any other methods can be called on an instantiated object.</p>
+
+                  <pre><code class="language-js">class Person {
+
+  constructor(name) {
+    this.name = name;
+  }
+
+  introduce() {
+    console.log(`Hello, my name is ${this.name}`);
+  }
+
+}
+
+const otto = new Person('Otto');
+
+otto.introduce();</code></pre>
+
+
+                  <p>If you don't provide your own constructor, then a default constructor will be supplied for you. If your class is a base class, the default constructor is empty:</p>
+                    <pre><code class="language-js">constructor() {}</code></pre>
+
+                  <p>
+                      If your class is a derived class, the default constructor calls the parent constructor, passing along any arguments that were provided:
+                  </p>
+                  <pre><code class="language-js">constructor(...args) {
+  super(...args);
+}</code></pre>
+
+                  <p>That enables code like this to work:</p>
+                  <pre><code class="language-js">class ValidationError extends Error {
+
+  printCustomerMessage() {
+    return `Validation failed :-( (details: ${this.message})`;
+  }
+
+}
+
+try {
+  throw new ValidationError("Not a valid phone number");
+} catch (error) {
+   if (error instanceof ValidationError) {
+    console.log(error.name); // This is Error instead of ValidationError!
+    console.log(error.printCustomerMessage());
+  } else {
+    console.log('Unknown error', error);
+    throw error;
+  }
+}</code></pre>
+                  <p>
+                      The ValidationError class doesn't need an explicit constructor, because it doesn't need to do any custom initialization. The default constructor then takes care of initializing the parent Error from the argument it is given.
+                  </p>
+
+                  <p>
+                      However, if you provide your own constructor, and your class derives from some parent class, then you must explicitly call the parent class constructor using super. For example:
+                  </p>
+                    <pre><code class="language-js">class ValidationError extends Error {
+
+  constructor(message) {
+    super(message);  // call parent class constructor
+    this.name = 'ValidationError';
+    this.code = '42';
+  }
+
+  printCustomerMessage() {
+     return `Validation failed :-( (details: ${this.message}, code: ${this.code})`;
+  }
+
+}
+
+try {
+  throw new ValidationError("Not a valid phone number");
+} catch (error) {
+   if (error instanceof ValidationError) {
+    console.log(error.name); // Now this is ValidationError!
+    console.log(error.printCustomerMessage());
+  } else {
+    console.log('Unknown error', error);
+    throw error;
+  }
+}
+</code></pre>
+                  <p>
+                      There can be only one special method with the name "constructor" in a class. Having more than one occurrence of a constructor method in a class will throw a SyntaxError error.
+                  </p>
+
+              </div>
+            
+
+        </div>
+    </div>
+</body>
+</html>

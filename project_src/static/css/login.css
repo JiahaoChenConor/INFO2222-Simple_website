@@ -1,0 +1,60 @@
+#maxbox{
+    margin: 0 auto;
+    margin-top: 100px;
+    padding: 20px, 80px;
+    /* background-color: #95a5a6; */
+    text-align: center;
+    width: 600px;
+    height: 400px;
+}
+
+#maxbox h1{
+    padding: 0;
+    padding-top: 60px;
+    color: whitesmoke;
+    font-size: 30px;
+
+}
+
+#maxbox .inputbox{
+    margin-top: 30px;
+
+}
+
+#maxbox .inputText{
+    margin-top: 20px;
+
+}
+
+#maxbox .inputText input{
+    border: 0;
+    padding: 6px;
+    border-bottom: 1px solid whitesmoke;
+    background-color: #FFFFFF00;
+    
+}
+
+#maxbox .inputbox input[type="submit"]{
+    margin: 0;
+    border: 0;
+    margin-top: 20px;
+    width: 150px;
+    height: 25px;
+    /* round border */
+    border-radius: 25px;
+    color: whitesmoke;
+    background-image: linear-gradient(to top, #6a85b6 0%, #bac8e0 100%);
+
+}
+
+#Register{
+    margin-top: 50px;
+    color:#34495e;
+    font-size: 17px;
+
+}
+
+#Register a{
+    color: #2c3e50;
+
+}

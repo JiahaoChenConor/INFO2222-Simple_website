@@ -1,0 +1,90 @@
+<head>
+ <link rel="icon" href="img/icon.jpg">
+<script src="js/script_head.js"></script>
+
+<style type="text/css">
+        *{
+        padding: 0;
+        margin: 0;
+        }
+
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background-color: #333;
+            /*position: fixed;*/
+          top: 0;
+          width: 100%;
+        }
+
+        li {
+          float: left;
+            font-family: Sans-serif;
+        }
+
+        li a {
+          display: block;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+        }
+
+        /* Change the link color to #111 (black) on hover */
+        li a:hover {
+          color:lightblue;
+        }
+
+        .active {
+          background-color: #777777;
+        }
+
+        p {
+            font-family: Optima, serif;
+            font-size: large;
+            margin-top: 10px;
+            margin-bottom: 30px;
+            line-height: 40px;
+
+
+        }
+
+        h1 ,h2{
+            font-family:  Marker Felt, fantasy;
+            margin-top: 40px;
+
+        }
+
+
+
+        dd, dl{
+            margin-left: 10px;
+            margin-bottom: 10px;
+            font-family: Optima, serif;
+            font-size: medium;
+            line-height: 25px;
+        }
+
+
+
+
+    </style>
+
+<title>Excelsiors website Development</title>
+</head>
+
+<p>
+
+<ul>
+
+  <li><a class="active" href="/home">Home</a></li>
+    <li><a href="/login" id="login_header">Login</a></li>
+  <li><a href="/forumtopic" id="forumtopic_header">Forum Topic</a></li>
+    <li><a href="/post" id="post_header">Post</a></li>
+  <li><a href="/knowledge" id="knowledge_header">Knowledge</a></li>
+  <li><a href="/about" id="about_header">About</a></li>
+  <li style="float:right"><a href="/allusers" id="this_user_header">${username}</a></li>
+
+</ul>

@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve excelsior website
+After=network.target
+
+[Service]
+User=www-data
+Group=www-pub
+WorkingDirectory=/var/www/project_src
+Environment="PATH=/var/www/project_src/excelsiorenv/bin"
+ExecStart=/var/www/project_src/excelsiorenv/bin/uwsgi --ini wsgi.ini
+
+[Install]
+WantedBy=multi-user.target
